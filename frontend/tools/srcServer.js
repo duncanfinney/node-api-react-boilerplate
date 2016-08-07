@@ -42,12 +42,21 @@ browserSync({
           chunkModules: false
         },
 
+        watchOptions: {
+          aggregateTimeout: 300,
+          poll: true
+        },
         // for other settings see
         // http://webpack.github.io/docs/webpack-dev-middleware.html
       }),
 
       // bundler should be the same as above
-      webpackHotMiddleware(bundler)
+      webpackHotMiddleware(bundler, {
+        watchOptions: {
+          aggregateTimeout: 300,
+          poll: true
+        },
+      })
     ]
   },
 
