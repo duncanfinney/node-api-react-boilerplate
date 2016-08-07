@@ -20,7 +20,7 @@ const getAll = (req, res, next) => {
       res.json(allMatches);
     } catch (err) {
       console.log('err', err);
-      next(err);
+      next(err.body);
     }
     
   })  
