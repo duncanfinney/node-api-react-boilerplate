@@ -1,0 +1,31 @@
+version: '2'
+services:
+  db:
+    image: postgres
+
+  web:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/code
+    links:
+      - db
+    environment:
+      - DATABASE_URL=postgres://db:5432
+      - PORT=8000
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - web
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/code
