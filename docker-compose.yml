@@ -3,7 +3,7 @@ services:
   db:
     image: postgres
 
-  web:
+  backend:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
@@ -15,16 +15,15 @@ services:
       - ./backend:/code
     links:
       - db
-    environment:
-      - DATABASE_URL=postgres://db:5432
-      - PORT=8000
+    env_file: .env.backend
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
+
     depends_on:
-      - web
+      - backend
     ports:
       - "3000:3000"
     volumes:
