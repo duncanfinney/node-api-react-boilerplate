@@ -48,6 +48,6 @@ export default {
   postcss: ()=> [autoprefixer],
   watchOptions: {
     poll: true,
-    aggregateTimeout: 1000
+    aggregateTimeout: 50
   }
 };

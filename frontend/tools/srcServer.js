@@ -43,7 +43,7 @@ browserSync({
         },
 
         watchOptions: {
-          aggregateTimeout: 300,
+          aggregateTimeout: 50,
           poll: true
         },
         // for other settings see
@@ -53,7 +53,7 @@ browserSync({
       // bundler should be the same as above
       webpackHotMiddleware(bundler, {
         watchOptions: {
-          aggregateTimeout: 300,
+          aggregateTimeout: 50,
           poll: true
         },
       })
