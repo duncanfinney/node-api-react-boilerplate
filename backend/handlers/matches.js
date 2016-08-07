@@ -3,7 +3,7 @@ const h5 = new HaloAPI(process.env.HALO_API_KEY);
 const co = require('bluebird-co').co;
 
 const getAll = (req, res, next) => {
-  
+
   let allMatches = [];
   co(function*() {
     try {
