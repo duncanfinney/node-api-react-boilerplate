@@ -13,8 +13,6 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/code
-    links:
-      - db
     env_file: .env.backend
 
   frontend:

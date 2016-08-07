@@ -1,6 +1,4 @@
 'use strict';
-require('dotenv').config();
-
 //Constants
 const PORT = process.env.PORT;
 
@@ -15,6 +13,29 @@ app.use(function(err, req, res, next) {
   res.status(500).json(err);
 });
 
-//Start the server
-app.listen(PORT);
-console.log('Running on http://localhost:' + PORT);
+//migrate the database
+const postgrator = require('postgrator');
+postgrator.setConfig({
+  migrationDirectory: __dirname + '/migrations',
+  driver: 'pg',
+  host: process.env.PGHOST,
+  port: 5432, // optionally provide port
+  database: process.env.PGDATABASE,
+  username: process.env.PGUSER,
+  password: process.env.PGPASS
+});
+console.log('migrating database');
+postgrator.migrate('001', function (err, migrations) {
+  if (err) {
+    throw err;
+  }
+
+  postgrator.endConnection(function () {
+
+    //Start the server
+    app.listen(PORT);
+    console.log('Running on http://localhost:' + PORT);
+
+
+  });
+});

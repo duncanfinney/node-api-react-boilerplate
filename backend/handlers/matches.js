@@ -23,7 +23,7 @@ const getAll = (req, res, next) => {
       next(err);
     }
     
-  }) 
+  })  
   
 }
 
